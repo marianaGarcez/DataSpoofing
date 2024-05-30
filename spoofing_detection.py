@@ -43,8 +43,8 @@ def get_cluster_insights(df_original, n_neighbors, mmsi):
 
     df = df_original.groupby('speed')['# Timestamp'].size().reset_index(name='count')
     sog_st_dev = np.std(df['speed'])
-    sog_mean = np.mean(df['speed'])
-    threshold= sog_mean+4*sog_st_dev # threshold in knot should be changed to m/s
+    sog_mean = 15
+    threshold= 30 # threshold is maxumin speed of the vessel
     if threshold<=1: # Check if the vessel is anchored the whole day then skip the algorithm. The algorithm works with the moored vessels. 
         return False, False, False, -1
     df = df_original[["x", "y"]]
